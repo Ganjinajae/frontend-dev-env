@@ -8,7 +8,7 @@ module.exports = {
     // main2: './src/app2.js' // [name]에서 동적으로 할당이 가능하다
   },
   output: {
-    paht: path.resolve('./dist'),
+    path: path.resolve('./dist'),
     filename: '[name].js'
   }
 }
