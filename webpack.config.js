@@ -14,10 +14,27 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.css$/,
         use: [
-          path.resolve('./my-webpack-loader.js')
+          'style-loader', // 처리된 javascript 문자열 style 코드를 html에 적용시켜 브라우저에서 
+          'css-loader' // css 파일을 javascript moudle처럼 사용
         ]
+      },
+      // file-loader: image 파일을 모듈로 사용할 수 있도록 변환, output file로 이동
+      // {
+      //   test: /\.png/,
+      //   use: [
+      //     'file-loader'
+      //   ]
+      // },
+      {
+        test: /\.(png|jpeg|gif|svg)$/,
+        loader: 'url-loader', // 파일을 base64로 인코딩하여 javascript 파일로 변환, 파일 크기 제한, 나머지는 file-loader로
+        options: {
+          publicPath: './dist/',
+          name: '[name].[ext]?[hash]',
+          limit: 20000, // 20KB 미만이면 url-loader로 base64 encoding함. 이상이면 file-loader가 실행됨 
+        }
       }
     ]
   }
