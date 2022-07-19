@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const childProcess = require('child_process'); // terminal 명령 실행할 수 있다.
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // default로 export 되어 있지 않다.
 
 // es6 moudle system이 아닌 node의 moudle system
 module.exports = { 
@@ -63,6 +64,7 @@ module.exports = {
         collapseWhitespace: true, // space 제거
         removeComments: true, // 주석 제거
       } : false
-    })
+    }),
+    new CleanWebpackPlugin(), // build시 dist 폴더 삭제하고 새롭게 구성할 수 있도록 해줌
   ]
 }
