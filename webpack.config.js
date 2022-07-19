@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const childProcess = require('child_process'); // terminal 명령 실행할 수 있다.
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // es6 moudle system이 아닌 node의 moudle system
 module.exports = { 
@@ -33,7 +34,7 @@ module.exports = {
         test: /\.(png|jpeg|gif|svg)$/,
         loader: 'url-loader', // 파일을 base64로 인코딩하여 javascript 파일로 변환, 파일 크기 제한, 나머지는 file-loader로
         options: {
-          publicPath: './dist/',
+          // publicPath: './dist/',
           name: '[name].[ext]?[hash]',
           limit: 20000, // 20KB 미만이면 url-loader로 base64 encoding함. 이상이면 file-loader가 실행됨 
         }
@@ -52,6 +53,16 @@ module.exports = {
       // TWO: '1+1'
       TWO: JSON.stringify('1+1'),
       'api.doamin': JSON.stringify('http://dev.api.domain.com')
-    }) // 
+    }),
+    new HtmlWebpackPlugin({ // 빌드과정에 html을 포함한다. => 의존적이지 않은 코드를 만들 수 있다. 유동적으로 dev, prod 등의 index.html 파일을 만들 수 있음
+      template: './src/index.html',
+      templateParameters: {
+        env: process.env.NODE_ENV === 'development' ? '(개발용)': ''
+      },
+      minify: process.env.NODE_ENV === 'production' ? { // 운영에서만 키자
+        collapseWhitespace: true, // space 제거
+        removeComments: true, // 주석 제거
+      } : false
+    })
   ]
 }
