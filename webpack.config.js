@@ -22,7 +22,7 @@ module.exports = {
         test: /\.css$/,
         use: [
           process.env.NODE_ENV === 'production'
-          ? MiniCssExtractPlugin.loader 
+          ? MiniCssExtractPlugin.loader  // css 분리하기 위한 loader가 필요하다.
           : 'style-loader', // 처리된 javascript 문자열 style 코드를 html에 적용시켜 브라우저에서 
           'css-loader' // css 파일을 javascript moudle처럼 사용
         ]
