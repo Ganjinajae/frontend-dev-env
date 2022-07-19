@@ -1,5 +1,6 @@
 const path = require('path');
-const MyWebpackPlugin = require('./my-webpack-plugin');
+const webpack = require('webpack');
+const childProcess = require('child_process'); // terminal 명령 실행할 수 있다.
 
 // es6 moudle system이 아닌 node의 moudle system
 module.exports = { 
@@ -40,6 +41,12 @@ module.exports = {
     ]
   },
   plugins: [
-    new MyWebpackPlugin() // 번들된 파일에 대해 딱 한 번 실행한다.
+    new webpack.BannerPlugin({
+      banner: `
+        Build Date: ${new Date().toLocaleString()}
+        Commit Version: ${childProcess.execSync('git rev-parse --short HEAD')}
+        Author: ${childProcess.execSync('git config user.name')}
+      `
+    })
   ]
 }
