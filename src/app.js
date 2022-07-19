@@ -7,6 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
   `
 })
 
-console.log(process.env.NODE_ENV);
-console.log(TWO);
-console.log(api.doamin);
+console.log(process.env.NODE_ENV); // development
+console.log(TWO); // 1+1
+console.log(api.doamin); // http://dev.api.domain.com

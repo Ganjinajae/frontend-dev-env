@@ -48,7 +48,7 @@ module.exports = {
         Author: ${childProcess.execSync('git config user.name')}
       `
     }),
-    new webpack.DefinePlugin({
+    new webpack.DefinePlugin({ // 환경 정보들을 정의할 수 있다.
       // TWO: '1+1'
       TWO: JSON.stringify('1+1'),
       'api.doamin': JSON.stringify('http://dev.api.domain.com')
