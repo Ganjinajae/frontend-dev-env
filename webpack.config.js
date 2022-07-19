@@ -1,4 +1,5 @@
 const path = require('path');
+const MyWebpackPlugin = require('./my-webpack-plugin');
 
 // es6 moudle system이 아닌 node의 moudle system
 module.exports = { 
@@ -37,5 +38,8 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins: [
+    new MyWebpackPlugin() // 번들된 파일에 대해 딱 한 번 실행한다.
+  ]
 }
