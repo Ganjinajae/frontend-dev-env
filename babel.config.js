@@ -5,6 +5,12 @@ module.exports = {
   //   '@babel/plugin-transform-strict-mode',
   // ]
   presets: [
-    './my-babel-preset.js'
+    // './my-babel-preset.js'
+    ['@babel/preset-env', {
+      targets: {
+        chrome: '79',
+        ie: '11'
+      }
+    }]
   ]
 }
