@@ -1,6 +1,13 @@
 module.exports = {
- rules: {
-   "no-unexpected-multiline": "error",
-   "no-extra-semi": "error",
- } 
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "rules": {
+    }
 }
