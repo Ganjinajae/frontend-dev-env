@@ -3,7 +3,7 @@ module.exports = {
         "browser": true,
         "es2021": true
     },
-    "extends": "eslint:recommended",
+    "extends": ["eslint:recommended", 'eslint-config-prettier'], // eslint와 겹치는 설정이 있으면 꺼버리는 extension
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module"
