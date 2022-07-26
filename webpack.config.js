@@ -21,6 +21,24 @@ module.exports = {
     client: {
       overlay: true,
     },
+    onBeforeSetupMiddleware: (devServerer) => {
+      devServerer.app.get("/api/users", (req, res) => {
+        res.json([
+          {
+            id: 1,
+            name: "Alice",
+          },
+          {
+            id: 2,
+            name: "Bek",
+          },
+          {
+            id: 3,
+            name: "Chris",
+          },
+        ]);
+      });
+    },
   },
   module: {
     rules: [
