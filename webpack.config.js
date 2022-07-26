@@ -4,6 +4,7 @@ const childProcess = require("child_process"); // terminal 명령 실행할 수 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin"); // default로 export 되어 있지 않다.
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const apiMocker = require("connect-api-mocker");
 
 // es6 moudle system이 아닌 node의 moudle system
 module.exports = {
@@ -22,22 +23,7 @@ module.exports = {
       overlay: true,
     },
     onBeforeSetupMiddleware: (devServerer) => {
-      devServerer.app.get("/api/users", (req, res) => {
-        res.json([
-          {
-            id: 1,
-            name: "Alice",
-          },
-          {
-            id: 2,
-            name: "Bek",
-          },
-          {
-            id: 3,
-            name: "Chris",
-          },
-        ]);
-      });
+      devServerer.app.use(apiMocker("/api", "mocks/api"));
     },
   },
   module: {
