@@ -5,6 +5,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin"); // default로 export 되어 있지 않다.
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const apiMocker = require("connect-api-mocker");
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
 const mode = process.env.NODE_ENV || "development";
 // es6 moudle system이 아닌 node의 moudle system
@@ -27,6 +29,21 @@ module.exports = {
       devServerer.app.use(apiMocker("/api", "mocks/api"));
     },
     hot: true,
+  },
+  optimization: {
+    minimizer:
+      mode === "production"
+        ? [
+            new OptimizeCssAssetsPlugin(),
+            new TerserPlugin({
+              terserOptions: {
+                compress: {
+                  drop_console: true, // 콘솔 로그를 제거한다.
+                },
+              },
+            }),
+          ]
+        : [],
   },
   module: {
     rules: [
