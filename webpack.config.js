@@ -14,7 +14,7 @@ module.exports = {
   mode,
   entry: {
     main: "./src/app.js",
-    result: "./src/result.js",
+    // result: "./src/result.js",
     // main2: './src/app2.js' // [name]에서 동적으로 할당이 가능하다
   },
   output: {
@@ -45,9 +45,9 @@ module.exports = {
             }),
           ]
         : [],
-    splitChunks: {
-      chunks: "all",
-    },
+    // splitChunks: {
+    //   chunks: "all",
+    // },
   },
   module: {
     rules: [
