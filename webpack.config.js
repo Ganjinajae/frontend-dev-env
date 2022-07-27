@@ -6,9 +6,10 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin"); // default로 ex
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const apiMocker = require("connect-api-mocker");
 
+const mode = process.env.NODE_ENV || "development";
 // es6 moudle system이 아닌 node의 moudle system
 module.exports = {
-  mode: "development",
+  mode,
   entry: {
     main: "./src/app.js",
     // main2: './src/app2.js' // [name]에서 동적으로 할당이 가능하다
