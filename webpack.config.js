@@ -14,7 +14,7 @@ module.exports = {
   mode,
   entry: {
     main: "./src/app.js",
-    // result: "./src/result.js",
+    // result: "./src/result.js", // code splitting 개발 초기 단계에 불필요, 코드가 많아지고 커졌을 때 해도 늦지 않음
     // main2: './src/app2.js' // [name]에서 동적으로 할당이 가능하다
   },
   output: {
