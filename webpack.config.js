@@ -10,7 +10,7 @@ const apiMocker = require("connect-api-mocker");
 module.exports = {
   mode: "development",
   entry: {
-    main: "./app.js",
+    main: "./src/app.js",
     // main2: './src/app2.js' // [name]에서 동적으로 할당이 가능하다
   },
   output: {
@@ -25,6 +25,7 @@ module.exports = {
     onBeforeSetupMiddleware: (devServerer) => {
       devServerer.app.use(apiMocker("/api", "mocks/api"));
     },
+    hot: true,
   },
   module: {
     rules: [
