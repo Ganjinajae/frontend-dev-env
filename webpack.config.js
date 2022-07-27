@@ -7,6 +7,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const apiMocker = require("connect-api-mocker");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 const mode = process.env.NODE_ENV || "development";
 // es6 moudle system이 아닌 node의 moudle system
@@ -48,6 +49,12 @@ module.exports = {
     // splitChunks: {
     //   chunks: "all",
     // },
+  },
+  // axios 모듈을 사용하는 것이 있으면 전역 변수처럼 쓸 수 있게 한다. 따로 빌드 X
+  // webpack으로 빌드 할 필요가 없는 것들을 정의하면 좋다. => 웹팩 빌드 시간 단축 (copy plugin과 같이 사용한다.)
+  // 실제 개발 초기에는 잘 안 씀. 후반에 빌드할 때 배포용량이 커지면 사용
+  externals: {
+    axios: "axios",
   },
   module: {
     rules: [
@@ -120,5 +127,8 @@ module.exports = {
     ...(process.env.NODE_ENV === "production" // 나머지 연산자를 붙일 수 있다? => 정보가 잘 없음
       ? [new MiniCssExtractPlugin({ filename: "[name].css" })] // css 파일을 뽑아내서 js로 한꺼번에 로딩하는 것이 아니라 js, css 각자 로딩하여 성능 향상을 꾀함
       : []), // 지정 안 하면 hash값으로 만들어짐
+    new CopyPlugin([
+      { from: "./node_modules/axios/dist/axios.min.js", to: "./axios.min.js" },
+    ]),
   ],
 };
